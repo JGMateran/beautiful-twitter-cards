@@ -18,6 +18,8 @@ export function ChangeStats () {
     })
   }
 
+  if (!state.stats) return null
+
   return (
     <>
       <InputWithIcon
@@ -44,6 +46,5 @@ export function ChangeStats () {
         onChange={(e) => handleChange('likes', e)}
       />
     </>
-
   )
 }
