@@ -11,8 +11,6 @@ export const Editor = forwardRef<HTMLDivElement, CardProps>(
   function EditorRef (_, ref) {
     const { state } = useStore()
 
-    console.log(state)
-
     return (
       <div className={styles.pattern}>
         <TweetCard

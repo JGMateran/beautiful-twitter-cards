@@ -19,7 +19,8 @@ type State = {
   drawer: boolean,
   share: number,
   comments: number,
-  likes: number
+  likes: number,
+  copying: boolean
 }
 
 type Action =
@@ -39,6 +40,10 @@ type Action =
     type: 'change stats',
     name: 'share' | 'comments' | 'likes',
     payload: string
+  }
+  | {
+    type: 'it is coping?',
+    payload: boolean
   }
 
 type Dispatch = (action: Action) => void
@@ -77,10 +82,34 @@ function storeReducer (state: State, action: Action) {
       }
     }
 
+    case 'it is coping?': {
+      return {
+        ...state,
+        copying: action.payload
+      }
+    }
+
     default: {
       throw new Error('Unhandled action')
     }
   }
+}
+
+export function onCopyAction (dispatch: Dispatch) {
+  dispatch({
+    type: 'it is coping?',
+    payload: true
+  })
+
+  setTimeout(
+    () => {
+      dispatch({
+        type: 'it is coping?',
+        payload: false
+      })
+    },
+    200
+  )
 }
 
 const storeInitialState: State = {
@@ -91,7 +120,8 @@ const storeInitialState: State = {
   drawer: false,
   share: 4100,
   comments: 284,
-  likes: 7200
+  likes: 7200,
+  copying: false
 }
 
 export function useStore () {

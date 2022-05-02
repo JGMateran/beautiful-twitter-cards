@@ -64,8 +64,14 @@ export function Aside ({
               <span className="flex-1">Download image</span>
               <Download className="w-4 h-4" />
             </Button>
-            <Button onClick={onCopy} className="space-x-2 inline-flex items-center">
-              <span className="flex-1">Copy to clipboard</span>
+            <Button
+              onClick={onCopy}
+              disabled={state.copying}
+              className="space-x-2 inline-flex items-center disabled:opacity-70"
+            >
+              <span className="flex-1">
+                {state.copying ? 'Copying...' : 'Copy to clipboard'}
+              </span>
               <Clipboard className="w-4 h-4" />
             </Button>
           </div>

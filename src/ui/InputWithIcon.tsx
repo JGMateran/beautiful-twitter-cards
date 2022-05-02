@@ -8,13 +8,17 @@ import {
   MessageCircle,
   Share,
   Heart,
-  X
+  X,
+  Search
 } from 'react-feather'
 
-type IconName = 'comment' | 'share' | 'likes'
+type IconName = 'comment' | 'share' | 'likes' | 'search'
 
 function getIconFromName (iconName: IconName) {
   switch (iconName) {
+    case 'search':
+      return <Search className="absolute w-4 h-4 left-3" />
+
     case 'comment':
       return <Share className="absolute w-4 h-4 left-3" />
 
@@ -49,7 +53,7 @@ export function InputWithIcon ({
 
   return (
     <div className={clsx(
-      'relative flex items-center border border-neutral-500 text-neutral-800 dark:text-white my-2',
+      'relative flex items-center border border-neutral-700 text-neutral-800 dark:text-white my-2',
       styles.uncontrol
     )}>
       {icon}
