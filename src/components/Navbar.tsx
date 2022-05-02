@@ -18,7 +18,9 @@ export function Navbar () {
           <DarkmodeButton />
 
           <a href="#" className="inline-flex items-center space-x-2 bg-black text-white leading-none py-2 font-bold px-3 rounded-md">
-            <span className="text-sm">Buy me a</span>
+            <span className="text-sm">
+              Buy me a
+            </span>
             <Coffee />
           </a>
 
