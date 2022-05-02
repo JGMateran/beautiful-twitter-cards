@@ -23,6 +23,9 @@ export type CardProps = {
   content?: boolean,
   date?: boolean,
   stats?: boolean,
+  share?: number,
+  comments?: number,
+  likes?: number,
 }
 
 export const themes: Record<CardThemes, string> = {
@@ -36,6 +39,23 @@ export const themes: Record<CardThemes, string> = {
   indigo: 'bg-gradient-to-br from-indigo-300 to-indigo-500'
 }
 
+// function that convert a number to a valid twitter number
+function convertToValidTwitterNumber (number: number | undefined): string {
+  if (number === undefined) {
+    return ''
+  }
+
+  if (number < 1000) {
+    return number.toString()
+  }
+
+  if (number < 1000000) {
+    return (number / 1000).toFixed(1) + 'k'
+  }
+
+  return (number / 1000000).toFixed(1) + 'm'
+}
+
 function Card (
   props: CardProps,
   ref: Ref<HTMLDivElement>
@@ -45,8 +65,11 @@ function Card (
     theme = 'sunset',
     width = 'normal',
     content = true,
-    date = true,
-    stats = true
+    // date = true,
+    stats = true,
+    share,
+    comments,
+    likes
   } = props
 
   const classes = clsx(
@@ -106,16 +129,20 @@ function Card (
                   <div className="flex items-center space-x-2">
                     <Share />
                     <strong className="text-black">
-                      4.1k
+                      {convertToValidTwitterNumber(share)}
                     </strong>
                   </div>
                   <div className="flex items-center space-x-2">
                     <MessageCircle />
-                    <strong className="text-black">284</strong>
+                    <strong className="text-black">
+                      {convertToValidTwitterNumber(comments)}
+                    </strong>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Heart />
-                    <strong className="text-black">7.2k</strong>
+                    <strong className="text-black">
+                      {convertToValidTwitterNumber(likes)}
+                    </strong>
                   </div>
                 </div>
               )

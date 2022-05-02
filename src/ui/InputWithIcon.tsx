@@ -1,14 +1,15 @@
+import type { ComponentPropsWithoutRef } from 'react'
+import { useRef } from 'react'
+
 import styles from '../global.module.css'
 
+import clsx from 'clsx'
 import {
   MessageCircle,
   Share,
   Heart,
   X
 } from 'react-feather'
-
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef } from 'react'
 
 type IconName = 'comment' | 'share' | 'likes'
 
@@ -37,7 +38,14 @@ export function InputWithIcon ({
   className,
   ...props
 }: InputWithIconProps) {
+  const inputRef = useRef<HTMLInputElement>(null)
   const icon = getIconFromName(iconName)
+
+  const handleClean = () => {
+    if (inputRef.current == null) return
+
+    inputRef.current.value = ''
+  }
 
   return (
     <div className={clsx(
@@ -46,13 +54,14 @@ export function InputWithIcon ({
     )}>
       {icon}
       <input
-        type="number"
-        className={clsx(
-          'bg-transparent leading-none py-4 focus:outline-none focus-visible:ring-2 text-sm px-11 w-full text-black placeholder:text-neutral-700 dark:placeholder:text-neutral-400 dark:text-white'
-        )}
+        ref={inputRef}
+        type="text"
+        className="bg-transparent leading-none py-4 focus:outline-none focus-visible:ring-2 text-sm px-11 w-full text-black placeholder:text-neutral-700 dark:placeholder:text-neutral-400 dark:text-white"
         {...props}
       />
-      <X className="absolute right-3 w-4 h-4" />
+      <button onClick={handleClean} className="absolute right-3 w-4 h-4">
+        <X className="w-4 h-4" />
+      </button>
     </div>
   )
 }

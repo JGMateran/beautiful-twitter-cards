@@ -8,10 +8,15 @@ import { Navbar } from './components/Navbar'
 import { StoreProvider } from './context/useStore'
 import { useToggle } from './hooks/useToggle'
 
-import { copyBlobImageToClipboard, downloadBlob, snapshotCreator } from './helpers'
+import {
+  copyBlobImageToClipboard,
+  downloadBlob,
+  snapshotCreator
+} from './helpers'
 
 export default function App () {
   const ref = useRef<HTMLDivElement>(null)
+  console.log('render')
 
   const [drawerVisibility, toggleDrawerVisibility] = useToggle(true)
 

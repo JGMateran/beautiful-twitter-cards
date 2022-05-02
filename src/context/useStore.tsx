@@ -16,7 +16,10 @@ type State = {
   content: boolean,
   date: boolean,
   stats: boolean,
-  drawer: boolean
+  drawer: boolean,
+  share: number,
+  comments: number,
+  likes: number
 }
 
 type Action =
@@ -32,6 +35,11 @@ type Action =
   | {
     type: 'toggle drawer'
   }
+  | {
+    type: 'change stats',
+    name: 'share' | 'comments' | 'likes',
+    payload: string
+  }
 
 type Dispatch = (action: Action) => void
 
@@ -41,6 +49,13 @@ const StoreContext = createContext<
 
 function storeReducer (state: State, action: Action) {
   switch (action.type) {
+    case 'change stats': {
+      return {
+        ...state,
+        [action.name]: action.payload
+      }
+    }
+
     case 'change visibility': {
       return {
         ...state,
@@ -73,7 +88,10 @@ const storeInitialState: State = {
   content: true,
   date: true,
   stats: true,
-  drawer: false
+  drawer: false,
+  share: 4100,
+  comments: 284,
+  likes: 7200
 }
 
 export function useStore () {

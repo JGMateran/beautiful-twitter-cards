@@ -1,31 +1,8 @@
 import {
   Download,
   Clipboard,
-  X,
-  MessageCircle,
-  Share,
-  Heart
+  X
 } from 'react-feather'
-
-/*
-          <div className={clsx(
-            'relative flex items-center border border-neutral-700 my-2',
-            styles.uncontrol
-          )}>
-            <MessageCircle className="absolute w-4 h-4 left-3" />
-            <input type="number" className="bg-transparent leading-none py-4 focus:outline-none focus-visible:ring-2 text-sm text-white pl-11 w-full" placeholder="Number of comments"/>
-            <X className="absolute right-3 w-4 h-4" />
-          </div>
-          <div className={clsx(
-            'relative flex items-center border border-neutral-700 my-2',
-            styles.uncontrol
-          )}>
-            <Share className="absolute w-4 h-4 left-3" />
-            <input type="number" className="bg-transparent leading-none py-4 focus:outline-none focus-visible:ring-2 text-sm text-white pl-11 w-full" placeholder="Number of shared" />
-            <X className="absolute right-3 w-4 h-4" />
-            </div> */
-
-import styles from '../global.module.css'
 
 import clsx from 'clsx'
 
@@ -35,12 +12,11 @@ import { useStore } from '../context/useStore'
 import { Button } from '../ui/Button'
 import { Themes } from './Themes'
 import { Visibilily } from './Visibility'
-import { InputWithIcon } from './InputWithIcon'
+import { ChangeStats } from './ChangeStats'
 
 export function Aside ({
   onDownload = () => {},
-  onCopy = () => {},
-  onClose = () => {}
+  onCopy = () => {}
 }: {
   open?: boolean,
   onDownload?: () => void,
@@ -80,23 +56,8 @@ export function Aside ({
           </div>
 
           <Themes />
-
           <Visibilily />
-
-          <InputWithIcon
-            iconName="share"
-            placeholder="Number of shared"
-          />
-
-          <InputWithIcon
-            iconName="comment"
-            placeholder="Number of comments"
-          />
-
-          <InputWithIcon
-            iconName="likes"
-            placeholder="Number of likes"
-          />
+          <ChangeStats />
 
           <div className="flex flex-col space-y-2 my-10">
             <Button onClick={onDownload} className="space-x-2 inline-flex items-center">
